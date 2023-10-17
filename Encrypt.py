@@ -98,7 +98,8 @@ class Encrypt:
                         "Y":87,
                         "Z":88,
                         ":":89,
-                        ";":90
+                        ";":90,
+                        "=":91
                         }
         self.int_text=self.convert_int()
 
