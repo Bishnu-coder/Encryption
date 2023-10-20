@@ -4,10 +4,18 @@ inp = input("Enter text to be encrypted\n-> ")
 
 KEY = 19
 enc = Encrypt(inp, KEY)
-Encrypted = enc.get_encrypted()
-print(f"\nencrypted text Is\n-> {Encrypted} ")
 
+print("\nStarting Encryption ...")
+if enc.encryptedMessage is not None:
+    Encrypted = enc.get_encrypted()
+    print(f"encrypted text of {inp} is\n-> {Encrypted} \n")
+else:
+    Encrypted = None
+
+print("\nStarting Decryption ...")
 dec = Decrypt(Encrypted)
-Decrypted = dec.get_decrypted()
-print(f"\ndecrypted text Is\n-> {Decrypted} ")
+if dec.encryptedMessage is not None:
+
+    Decrypted = dec.get_decrypted()
+    print(f"decrypted text of {Encrypted} is\n-> {Decrypted} ")
 

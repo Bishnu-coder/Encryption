@@ -24,8 +24,12 @@ class Encrypt:
         list_int = []
         for word in self.text:
             # -------------------------------------------------------
-            for letter in word:  # |-> converting string's letter to int
-                list_int.append(f"|{self.char_dict[letter]}")  # |-
+            try:
+                for letter in word:  # |-> converting string's letter to int
+                    list_int.append(f"|{self.char_dict[letter]}")  # |-
+            except KeyError:
+                print(f"Invalid character '{letter}' in string, the text cannot be encrypted, please update the characterDict.py file")
+                return None  # if string contains any invalid character
             # --------------------------------------------------------
         list_int[len(list_int) - 1] += "|"  # ---- adding a pipe after last character of every word
 
@@ -42,15 +46,18 @@ class Encrypt:
         so 2 at first 6 at last of int string
         '''
         messageIntegers = self.convert_message_to_integers()
-        list_enc = []
-        for m,i in enumerate(messageIntegers.split("_")):
-            phrase = str(self.KEY * (m+1))
-            list_enc.append(f"{phrase[0]}{i}{phrase[1]}")
+        if messageIntegers is not None:
+            list_enc = []
+            for m,i in enumerate(messageIntegers.split("_")):
+                phrase = str(self.KEY * (m+1))
+                list_enc.append(f"{phrase[0]}{i}{phrase[1]}")
 
-        enc_text = str("")
-        for text in list_enc:
-            enc_text += f"_{text}"  # list to string conversion with _ as word seperator
-        return enc_text
+            enc_text = str("")
+            for text in list_enc:
+                enc_text += f"_{text}"  # list to string conversion with _ as word seperator
+            return enc_text
+        else:
+            return None
 
     def get_decrypted(_text):
         """
@@ -85,8 +92,12 @@ class Decrypt:
     def __init__(self, encryptedMessage) -> None:
         # TODO: add decrypt function that decrypts the encrypted text using the key
         self.encryptedMessage = encryptedMessage
-        self.KEY = self.get_key()
-        self.char_dict = char_dict
+        if self.encryptedMessage is None:
+            print("Invalid encrypted text, as it is 'None', please try again")
+        else:
+            self.KEY = self.get_key()
+            self.char_dict = char_dict
+            self.decryptedMessage = self.get_decrypted()
 
 
     def get_key(self):
