@@ -12,7 +12,11 @@ class Encrypt:
         self.text = Message
         self.KEY = key
         self.char_dict = char_dict
-        self.encryptedMessage = self.get_encrypted()
+        encryptedMessage = self.get_encrypted()
+        if encryptedMessage is not None:
+            self.encryptedMessage = encryptedMessage
+        else:
+            self.encryptedMessage = None
 
     def convert_message_to_integers(self) -> str:
         '''
