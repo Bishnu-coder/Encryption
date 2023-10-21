@@ -15,7 +15,6 @@ else:
 print("\nStarting Decryption ...")
 dec = Decrypt(Encrypted)
 if dec.encryptedMessage is not None:
-
     Decrypted = dec.get_decrypted()
     print(f"decrypted text of {Encrypted} is\n-> {Decrypted} ")
 
